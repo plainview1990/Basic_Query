@@ -1,0 +1,577 @@
+select * from movie_gross
+--select top 10 * from movie_gross
+where total_gross > 500000000 and genre = 'Action'
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross (select * หมายถึงเลือกทั้งหมด)
+-- เลือกข้อมูล 10 อันดับแรกจากทั้งหมด จาก Table ชื่อ movie_gross
+ระบุเงื่อนไข คอลั่ม total_gross มากกว่า 1 ร้อยล้านบาท และ  คอลั่ม genre เท่ากับ Action
+สามารถเชื่อมเงื่อนไขด้วยคำสั่ง or หรือ and ก็ได้
+เงื่อนไขที่ระบุสามารถใช้เครื่องหมายดำเนินการเช่น >, <, =, !=(ไม่เท่ากับ) หรือหากเป็นข้อความ ต้องอยู่ในเครื่องหมาย single quote ''
+
+select distinct genre from movie_gross
+เลือกคอลั่ม genre จาก Table movie_gross โดยให้ค้นหาค่าทั้งหมดและแสดงเฉพาะค่าที่ซ้ำกันออกมา (distinct)
+
+select top 5 movie_title, release_date, 
+DATEPART(year,release_date) year,
+DATEPART(month,release_date) month,
+DATEPART(day,release_date) day,
+DATEPART(DAYOFYEAR,release_date) day_of_year,
+DATEPART(week,release_date) week,
+DATENAME(weekday,release_date) day_name,
+DATENAME(month,release_date) month_name,
+format(release_date,'dddd','th') th_date,
+format(release_date,'MMM','th') th_month_Initial,
+format(release_date,'MMMM','th') th_month,
+format(release_date,'yyy','th') th_year,
+format(release_date,'dddd','en') en_date,
+format(release_date,'MMM','en') en_month_Initial,
+format(release_date,'MMMM','en') en_month,
+format(release_date,'yyy','en') en_year
+from movie_gross
+เลือกข้อมูล 5 อันดับแรก จากคอลั่ม movie_title, release_date,
+ ใช้งานฟังก์ชั่น DATEPART เลือกคอลั่ม release_date แสดงค่าปีเป็นตัวเลข แสดงคอลั่มชื่อ year
+ ใช้งานฟังก์ชั่น DATEPART เลือกคอลั่ม release_date แสดงค่าเดือนเป็นตัวเลข แสดงคอลั่มชื่อ month
+ ใช้งานฟังก์ชั่น DATEPART เลือกคอลั่ม release_date แสดงค่าวันที่เป็นตัวเลข แสดงคอลั่มชื่อ day
+ ใช้งานฟังก์ชั่น DATEPART เลือกคอลั่ม release_date แสดงค่าวันที่เท่าไหร่ของปี (1-365) แสดงคอลั่มชื่อ day_of_year
+ ใช้งานฟังก์ชั่น DATEPART เลือกคอลั่ม release_date แสดงค่าสัปดาห์ที่เท่าไหร่ของปี (1-52) แสดงคอลั่มชื่อ week
+ ใช้งานฟังก์ชั่น DATENAME เลือกคอลั่ม release_date แสดงค่าวันที่เป็นชื่อวัน แสดงคอลั่มชื่อ day_name
+ ใช้งานฟังก์ชั่น DATENAME เลือกคอลั่ม release_date แสดงค่าเดือนเป็นชื่อเดือน แสดงคอลั่มชื่อ month_name
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นวันอะไร ['dddd'] และเป็นภาษาไทย ['th'] แสดงคอลั่มชื่อ th_date
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นเดือนอะไร เป็นตัวย่อ ['MMM'] และเป็นภาษาไทย ['th'] แสดงคอลั่มชื่อ th_month_Initial
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นเดือนอะไร เป็นชื่อเต็ม ['MMMM'] และเป็นภาษาไทย ['th'] แสดงคอลั่มชื่อ th_month
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นปี พ.ศ. อะไร ['yyy'] และเป็นภาษาไทย ['th'] แสดงคอลั่มชื่อ th_year
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นวันอะไร ['dddd'] และเป็นภาษาอังกฤษ ['en'] แสดงคอลั่มชื่อ en_date
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นเดือนอะไร เป็นตัวย่อ ['MMM'] และเป็นภาษาอังกฤษ ['en'] แสดงคอลั่มชื่อ en_month_Initial
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นเดือนอะไร เป็นชื่อเต็ม ['MMMM'] และเป็นภาษาอังกฤษ ['en'] แสดงคอลั่มชื่อ en_month
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นปี ค.ศ. อะไร ['yyy'] และเป็นภาษาอังกฤษ ['en'] แสดงคอลั่มชื่อ en_year
+
+select *,
+DATEPART(weekday,release_date) day_of_week,
+format(release_date,'dddd','en') day_name
+from movie_gross
+order by day_of_week
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross
+ใช้งานฟังก์ชั่น DATEPART เลือกคอลั่ม release_date แสดงค่าว่าเป็นวันที่เท่าไหร่ในสัปดาห์ (วันที่ 1-7) แสดงคอลั่มชื่อ  day_of_week
+ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นวันอะไร ['dddd'] และเป็นภาษาอังกฤษ ['an'] แสดงคอลั่มชื่อ day_name
+เรียงลำดับตามคอลั่ม day_of_week
+
+select format(release_date,'dddd','en') day_name,
+count(*) number
+from movie_gross
+group by format(release_date,'dddd','en')
+order by count(*) desc
+จาก Table ชื่อ movie_gross ใช้งานฟังก์ชั่น format เลือกคอลั่ม release_date โดยกำหนดให้แสดงค่าวันที่เป็นวันอะไร ['dddd'] และเป็นภาษาอังกฤษ ['an'] แสดงคอลั่มชื่อ day_name
+นับจำนวนแถวทั้งหมด แสดงคอลั่มชื่อ number
+รวมกลุ่มค่าจาก format(release_date,'dddd','en') ที่เหมือนกันเข้าด้วยกัน
+เรียงลำดับจากค่าที่นับจำนวนได้ count(*) จากมากไปน้อย
+
+select * from movie_gross
+where DATEPART (year,release_date) = 1990
+order by movie_title
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross
+ระบุเงื่อนไข DATEPART คือการค้นหาแยกส่วนของ วัน/เดือน/ปี โดยในที่นี้คือระบุให้ค้นหาเฉพาะปี 1990 จากคอลั่ม release_date สามารถระบุให้ค้นหาได้หลายแบบรูปแบบตามลักษณะของช่วงเวลาตามปฏิทิน เช่น year, week, month, dayofyear เป็นต้น
+order by สั่งให้ คอลั่ม movie_title เรียงตามตัวอักษรหรือตัวเลข
+
+select count(*) Number, sum(total_gross) Total from movie_gross
+where DATEPART (year,release_date) = 1990
+เลือกให้ นับจำนวนรวม แสดงคอลั่มชื่อ Number, เลือกให้แสดงผลรวมของคอลั่ม total_gross จาก Table ชื่อ movie_gross แสดงคอลั่มชื่อ Total
+ระบุเงื่อนไข DATEPART ค้นหาเฉพาะปี 1990 จากคอลั่ม release_date 
+
+select * from movie_gross
+where genre in('Action', 'Comedy')
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross
+ระบุเงื่อนไข โดยใช้คำสั่ง in() [หมายถึง อยู่ในเงื่อนไข] หรือ not in() [หมายถึง ไม่อยู่ในเงื่อนไข] ผลลัพธ์เหมือนกับการใช้คำสั่ง or ในการเชื่อมเงื่อนไข ในตัวอย่างนี้หมายถึงระบุเงื่อนไข คอลั่ม genre เท่ากับ Action หรือ Comedy 
+
+select * from movie_gross
+where total_gross between 300000000 and 500000000
+order by total_gross desc
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross
+ระบุเงื่อนไข โดยใช้คำสั่ง between หมายถึง การระบุเงื่อนไขเป็นช่วงๆ นิยมใช้กับเงื่อนไขที่เป็นตัวเลข ในตัวอย่างนี้หมายถึงระบุเงื่อนไข คอลั่ม total_gross อยู่ระหว่าง 300000000 ถึง 500000000
+order by สั่งให้ คอลั่ม total_gross เรียงตามตัวอักษรหรือตัวเลข desc คือการระบุให้เรียงจากมากไปน้อย (descending) ส่วนการระบุให้เรียงจากน้อยไปมาก ใช้คำสั่ง asc (ascending) หรือโดย default ของการใช้คำสั่ง order by จะเป็นการเรียงจากน้อยไปมากอยู่แล้ว จึงไม่จำเป็นต้องใช้คำสั่ง asc ก็ได้เช่นกัน
+
+select * from movie_gross
+--where movie_title like '%toy story%'
+--where movie_title like '__n%'
+--where movie_title like '[^0-9]%'
+order by movie_title
+เลือกข้อมูลทั้งหมด (*) จาก Table ชื่อ movie_gross
+ระบุเงื่อนไข โดยใช้คำสั่ง like หมายถึงการค้นหาคำเหมือน ซึ่งเป็น keyword ที่ต้องการที่ถูกบันทึกเอาไว้ (contain)  
+ในตัวอย่างนี้เงื่อนไขแรกหมายถึง ระบุเงื่อนไขคอลั่ม movie_title ค้นหาที่มีคำว่า toy story บันทึกอยู่ เครื่องหมาย % ใน single quote หมายถึงค่าว่าง หรือเป็นอะไรก็ได้ หากนำ % ตัวหน้า keyword ออกจะหมายถึง ค้นหาโดยเริ่มต้นด้วยคำ keyword ตัวอย่างเช่น ['story%'] หากนำ % ตัวหลัง keyword ออกจะหมายถึง ค้นหาโดยลงท้ายด้วยคำ keyword ตัวอย่างเช่น  ['%story']
+เงื่อนไขที่สองหมายถึง ระบุเงื่อนไขคอลั่ม movie_title ค้นหาคำนำหน้าตัวที่ 3 ที่มีตัวอักษร n และคำนำหน้าสองตัวอักษรขึ้นต้นด้วยอะไรก็ได้
+เงื่อนไขที่สามหมายถึง ระบุเงื่อนไขคอลั่ม movie_title ค้นหาคำนำหน้าที่ไม่ใช่ตัวเลข 0-9 ใช้เครื่องหมาย ^ ในการแทนคำว่าไม่ใช่
+order by สั่งให้ คอลั่ม total_gross เรียงตามตัวอักษรหรือตัวเลข
+
+select * from movie_gross
+where genre is null
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross
+ระบุเงื่อนไข คอลั่ม genre เท่ากับค่า null สำหรับค่า null ต้องใช้คำสั่ง is หรือ is not จะไม่ใช้เครื่องหมาย = หรือ !=
+
+
+select * from revenue
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ revenue
+select		year,	
+		isnull(studio_entertainment,0) + 
+		isnull(disney_consumer_products,0) +
+		isnull(disney_interactive,0) +
+		isnull(walt_disney_parks_and_resorts,0) + 
+		isnull(disney_media_networks,0), 
+		total 
+		from revenue
+เลือกข้อมูลจากคอลั่ม 	year, 
+	 	studio_entertainment, 
+		disney_consumer_products,
+		disney_interactive,
+		walt_disney_parks_and_resorts,
+		disney_media_networks,
+		total
+จาก Table ชื่อ revenue
+สำหรับค่า null ไม่ได้หมายถึงค่า 0 แต่หมายถึงข้อมูลที่ยังไม่ทราบค่า หรือข้อมูลยังไม่ครบถ้วนสมบูรณ์ จึงให้เป็นค่า null โดยตัวอย่างนี้ ต้องการหาผลรวมของรายได้ทั้งหมด 5 ช่องทาง ซึ่งมีบางช่องทางของรายได้เป็นค่า null ทำให้เมื่อแสดงผลรวมออกมาจะได้เป็นค่า null หรือ null บวกกับเลขอะไรก็เท่ากับค่า null จึงต้องมีการกำหนดค่า null ให้เป็น 0 ด้วยการใช้คำสั่ง isnull(คอลั่ม, ค่า null ในตัวอย่างคือ 0)
+
+select	sum(disney_media_networks) [total revenue disney_media_networks], 
+		count(*) [count all], 
+		count(disney_media_networks) [count disney_media_networks],
+		avg(disney_media_networks) [average revenue disney_media_networks],
+		min(disney_media_networks) [minimum revenue disney_media_networks],
+		max(disney_media_networks) [maximum revenue disney_media_networks]
+		from revenue
+เลือกข้อมูล 	ผลรวมของคอลั่ม disney_media_networks แสดงหัวคอลั่มชื่อ total revenue disney_media_networks
+	นับจำนวนแถวทั้งหมด แสดงหัวคอลั่มชื่อ count all
+	นับจำนวนแถวทั้งหมดของคอลั่ม disney_media_networks แสดงหัวคอลั่มชื่อ count disney_media_networks
+	หาค่าเฉลี่ยของคอลั่ม disney_media_networks โดยการนำผลรวมของคอลั่ม disney_media_networks หารด้วยจำนวนแถวทั้งหมดของคอลั่ม disney_media_networks แสดงหัวคอลั่มชื่อ average revenue disney_media_networks
+	หาค่าต่ำสุดของคอลั่ม disney_media_networks แสดงหัวคอลั่มชื่อ minimum revenue disney_media_networks
+	หาค่าสูงสุดของคอลั่ม disney_media_networks แสดงหัวคอลั่มชื่อ maximum revenue disney_media_networks
+จากตัวอย่างนี้มีคอลั่ม disney_media_networks จำมีค่า null ด้วย ทำให้ผลลัพท์ของจำนวนแถวทั้งหมดของคอลั่ม disney_media_networks ไม่นับค่า null และการหาค่าเฉลี่ยก็จะนำแถวทั้งหมดที่ไม่รวมค่า null ไปหารด้วยเช่นกัน
+
+
+select top 10 *, newid() from movie_gross
+select top 10 percent *, newid() from movie_gross
+order by newid()
+เลือกข้อมูล 10 อันดับจากทั้งหมด จาก Table ชื่อ movie_gross และแสดงคอลั่มจากฟังก์ชั่น newid
+เลือกข้อมูล 10% (ใช้คำสั่ง percent) จากทั้งหมด จาก Table ชื่อ movie_gross และแสดงคอลั่มจากฟังก์ชั่น newid
+เรียงตามฟังก์ชั่น newid คือการสร้าง unique id ขึ้นมาใหม่แบบสุ่ม
+ผลลัพท์ที่ได้จะเป็นแบบสุ่ม เนื่องจาก ฟังก์ชั่น newid จะทำการสร้าง unique id ใหม่ทุกครั้งที่ execute
+
+select top 1 with ties director , count(*) no_movies from director
+group by director
+order by no_movies desc
+เลือกข้อมูล สูงสุดอันดับแรก จากคอลั่ม director โดยนับจำนวนหนังของผู้กำกับหนังคนเดียวกันที่กำกับเยอะที่สุด และใช้ชื่อคอลั่ม no_movies จาก Table ชื่อ director
+group by คอลั่ม director
+เรียงตามลำดับจำนวนที่นับได้ จากมากไปน้อย
+อธิบายเพิ่มเติมในบรรทัดแรก หากไม่มีใช้คำสั่ง with ties จะทำให้ได้ผลลัพธ์ top 1 แค่บรรทัดเดียว ถึงแม้ว่าจะมีจำนวนสูงสุดมากกว่า 1 ก็ตาม ทำให้ผลลัพธ์ไม่ถูกต้อง แต่หากใส่คำสั่ง with ties เข้าไปด้วย จะทำให้ได้ผลลัพธ์ทุกตัวที่มีจำนวนสูงสุด
+
+
+drop table if exists data_science
+select top 70 percent * 
+into data_science
+from movie_gross
+order by newid()
+
+drop table if exists test_data;
+with cte as (
+select * from movie_gross
+except
+select * from data_science
+)
+select * into test_data from cte
+
+select * from test_data
+
+ถ้าหากมี Table เดิมที่ชื่อ data_science ให้ลบ Table นั้นทิ้ง
+เลือกข้อมูล 70% ของข้อมูลทั้งหมดจาก Table movie_gross
+ไปสร้าง Table ใหม่ (คำสั่ง into) ที่ชื่อ data_science
+เรียงข้อมูลตามฟังก์ชั่น newid() คือการสร้าง unique id ขึ้นมาใหม่ให้แต่ละแถวแบบสุ่ม
+
+ถ้าหากมี Table เดิมที่ชื่อ test_data ให้ลบ Table นั้นทิ้ง
+with cte as(
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross แต่ให้ยกเว้นหรือไม่เลือก ข้อมูลทั้งหมดจาก Table ชื่อ data_science
+)
+เลือกข้อมูลทั้งหมดจาก cte ไปสร้าง Table ใหม่ (คำสั่ง into) ที่ชื่อ test_data
+
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ test_data
+
+
+select * from movie_gross
+order by inflation_adjusted_gross desc offset 1 row fetch next 5 row only
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross
+เรียงตามลำดับคอลั่ม inflation_adjusted_gross จากมากไปน้อย โดยให้ skip ไป 1 แถว (ใช้คำสั่ง offset) และแสดงผลต่อไปอีก 5 แถว (ใช้คำสั่ง fetch) คำสั่ง offset, fetch จะต้องอยู่ภายใต้คำสั่ง order by
+
+select movie_title + '  ('+genre+')'
+--select concat(movie_title,' (',release_date,') ')
+--select concat(movie_title,' (',year(release_date),') ')
+--select concat(movie_title,' (',format(total_gross,'n0'),' ) ')
+from movie_gross
+เลือกข้อมูลจาก Table ชื่อ movie_gross
+ในตัวอย่างนี้เงื่อนไขแรกหมายถึง เลือกคอลั่ม movie_title กับคอลั่ม genre เชื่อมต่อข้อความเข้าด้วยกัน โดยจัดเว้นวรรคและวงเล็บให้สวยงาม เนื่องจากประเภทข้อความเป็น character เหมือนกัน จึงสามารถใช้เครื่องหมาย + ได้
+เงื่อนไขที่สองหมายถึง เลือกคอลั่ม movie_title กับคอลั่ม release_date เชื่อมต่อข้อความเข้าด้วยกัน ด้วยฟังก์ชั่น concat()
+เงื่อนไขที่สามหมายถึง เลือกคอลั่ม movie_title กับคอลั่ม release_date เชื่อมต่อข้อความเข้าด้วยกัน ด้วยฟังก์ชั่น concat() และแสดง release_date เฉพาะปีเท่านั้น ด้วยคำสั่ง year()
+เงื่อนไขที่สี่หมายถึง เลือกคอลั่ม movie_title กับคอลั่ม total_gross เชื่อมต่อข้อความเข้าด้วยกัน ด้วยฟังก์ชั่น concat() และแสดง total_gross ในรูปแบบสากลที่ใส่ , ตัวเลขทุก 3 หลัก ด้วยคำสั่ง format(ชื่อคอลั่ม,'n0')
+ฟังก์ชั่น concat() หมายถึงการเชื่อมต่อข้อความแต่ละคอลั่มเข้าด้วยกัน ซึ่งสามารถเชื่อมต่อข้อความได้ทุกประเภท เช่นเชื่อมต่อ character กับ numeric เข้าด้วยกัน
+
+
+select top 5 movie_title, 
+upper(movie_title),
+lower(movie_title),
+len(movie_title),
+SUBSTRING(movie_title,1,10)
+from movie_gross
+เลือกข้อมูล 5 อันดับแรกจากคอลั่ม movie_title
+แสดงข้อความจากคอลั่ม movie_title เป็นตัวพิมพ์ใหญ่ทั้งหมด
+แสดงข้อความจากคอลั่ม movie_title เป็นตัวพิมพ์เล็กทั้งหมด
+หาความยาวของตัวอักษรแต่ละแถว จากคอลั่ม movie_title
+แสดงข้อความบางส่วนจากคอลั่ม movie_title โดยกำหนดให้แสดงผลตั้งแต่ตัวอักษรที่ 1 ถึง 10 เท่านั้น
+จาก Table ชื่อ movie_gross
+
+select top 1 with ties movie_title,
+len(movie_title) [length]
+from movie_gross
+order by length desc
+เลือกข้อมูล สูงสุดอันดับแรก แสดงทั้งหมดหากมีมากกว่า 1 อันดับ จากคอลั่ม movie_title จาก Table ชื่อ movie_gross
+หาความยาวของตัวอักษรแต่ละแถว จากคอลั่ม movie_title แสดงผลคอลั่มชื่อ length
+เรียงลำดับคอลั่ม length จากมากไปน้อย
+
+select top 5 movie_title, director,
+charindex(' ',director) [space],
+substring(director, 1, charindex(' ',director) -1) [first_name],
+substring(director, charindex(' ',director) +1, 100) [last_name],
+left(director, charindex(' ',director) -1) [first_name2]
+from director
+เลือกข้อมูล 5 อันดับแรก จากคอลั่ม movie_title และคอลั่ม director จาก Table ชื่อ director
+หาตำแหน่งตัวอักษรในคอลั่ม ในตัวอย่างนี้คือ หาตำแหน่งของช่องว่าง [' '] ในคอลั่ม director แสดงผลคอลั่มชื่อ space
+แสดงข้อความบางส่วนจากคอลั่ม director โดยกำหนดให้แสดงผลตั้งแต่ตัวอักษรที่ 1 ถึง ตัวอักษรที่ใช้ฟังก์ชั่น charindex ในการช่องตำแหน่งช่องว่างและลบไป 1 ตำแหน่ง เพื่อให้ได้ชื่อ first name พอดี และแสดงผลคอลั่มชื่อ first_name
+แสดงข้อความบางส่วนจากคอลั่ม director โดยกำหนดให้แสดงผลตั้งแต่ตัวอักษรที่ใช้ฟังก์ชั่น charindex ในการช่องตำแหน่งช่องว่างและบวกไป 1 ตำแหน่ง ถึงตัวอักษรที่ 100 เพื่อให้ได้ชื่อ last name พอดี และแสดงผลคอลั่มชื่อ last_name 
+(สาเหตุที่ใช้ 100 เนื่องจากว่า ไม่สามารถระบุตำแหน่งตัวอักษรตัวสุดท้ายของนามสกุลได้ จึงต้องกำหนดให้มีตำแหน่งที่ไกลมากๆเพื่อครอบคลุมนามสกุลทุกคนบนโลก อย่าง 100 เพราะไม่น่าจะมีใครบนโลกที่มีนามสกุลมากถึง 100 ตัวอักษร)
+เป็นการแสดงข้อความจากตำแหน่งที่ระบุมาด้านซ้ายกี่ตัวอักษร ในตัวอย่างนี้คือ แสดงข้อความจาก คอลั่ม director โดยกำหนดให้แสดงผลจากตำแหน่งของฟังก์ชั่น charindex ในการช่องตำแหน่งช่องว่างและลบไป 1 ตำแหน่ง ไปทางซ้่ายจนครบ และแสดงผลคอลั่มชื่อ first_name2 การแสดงผลจะได้ผลลัพท์เหมือนกับบรรทัดที่ 3
+
+select movie_title,
+substring(director, 1, charindex(' ',director) -1) [first_name],
+substring(director, charindex(' ',director) +1, 100) [last_name]
+from director
+order by last_name
+เลือกข้อมูลจากคอลั่ม movie_title จาก Table ชื่อ director
+แสดงข้อความบางส่วนจากคอลั่ม director โดยกำหนดให้แสดงผลตั้งแต่ตัวอักษรที่ 1 ถึง ตัวอักษรที่ใช้ฟังก์ชั่น charindex ในการช่องตำแหน่งช่องว่างและลบไป 1 ตำแหน่ง เพื่อให้ได้ชื่อ first name พอดี และแสดงผลคอลั่มชื่อ first_name
+แสดงข้อความบางส่วนจากคอลั่ม director โดยกำหนดให้แสดงผลตั้งแต่ตัวอักษรที่ใช้ฟังก์ชั่น charindex ในการช่องตำแหน่งช่องว่างและบวกไป 1 ตำแหน่ง ถึงตัวอักษรที่ 100 เพื่อให้ได้ชื่อ last name พอดี และแสดงผลคอลั่มชื่อ last_name 
+เรียงลำดับคอลั่ม last_name ตามตัวอักษร
+
+select getdate()
+select datediff(day,'1990-08-09',getdate())
+select datediff(minute,'2023-01-01 00:00','2023-01-01 01:09')
+select datediff(minute,'2023-01-01 00:00','2023-01-01 00:09') % 60
+select getdate(), dateadd(day, 5, getdate())
+select format(getdate(), 'ddd dd-MM-yyyy'), format(dateadd(day, 5, getdate()), 'ddd dd-MM-yyyy')
+select convert(datetime,'2023-01-01')
+select cast('2023-01-01' as datetime)
+แสดงวันที่ปัจจุบัน
+แสดงวันที่แตกต่างกันเท่าไหร่ ในตัวอย่างนี้คือ กำหนดให้แสดงค่าเป็นวัน โดยหาความแตกต่างของวันที่ 1990-08-09 ถึงวันที่ปัจจุบัน สามารถกำหนดเป็นอย่างอื่นได้อีกเช่น month, year, minute เป็นต้น
+แสดงนาทีที่แตกต่างกัน ของช่วงเวลา 2023-01-01 00:00 และ 2023-01-01 01:09 ได้ผลลัพท์เป็น 69 นาที
+แสดงนาทีที่แตกต่างกัน ของช่วงเวลา 2023-01-01 00:00 และ 2023-01-01 01:09 และหารเอาค่าเศษ (%) ด้วย 60 เพื่อหานาทีภายใน 1 ชั่วโมง ได้ผลลัพท์เป็น 9 นาที
+แสดงวันที่ปัจจุบัน และแสดงวันที่บวกจากวันที่ปัจจุบันไปอีก 5 วัน สามารถกำหนดเป็นลบได้ด้วยเช่นกัน
+แสดงวันที่ปัจจุบัน และแสดงวันที่บวกจากวันที่ปัจจุบันไปอีก 5 วัน โดยใช้ฟังก์ชัน format ในการกำหนดรูปแบบวันที่ที่แสดงค่า
+convert() และ cast() คือฟังก์ชั่นในการแปลงข้อมูล string ให้กลายเป็นข้อมูลวันที่ (datetime) โดยฟังก์ชั่นทั้งสองทำงานเหมือนกัน แตกต่างกันที่รูปแบบการใช้คำสั่ง
+
+
+select movie_title, release_date,
+datediff(year,release_date,getdate()) diff_year
+from movie_gross
+เลือกข้อมูลจากคอลั่ม movie_title, release_date จาก Table ชื่อ movie_gross
+แสดงปีที่แตกต่างกัน โดยกำหนดค่าให้หาความแตกต่างของปีในคอลั่ม release_date และปีในปัจจุบัน แสดงผลในคอลั่มชื่อ diff_year
+
+
+create table car_park (
+	plate_no nvarchar(8),
+	time_in datetime,
+	time_out datetime
+);
+insert into car_park values
+	(N'กก 1234','2023-01-01 11:00', '2023-01-01 13:00'),
+	(N'ขข 5678','2023-01-01 11:00', '2023-01-01 11:10'),
+	(N'คค 0000','2023-01-01 11:50', '2023-01-01 14:00'),
+	('AZ 2020','2023-01-01 11:50', '2023-01-02 15:10')
+สร้าง Table ชื่อ car_park โดยกำหนดดังนี้ (
+	สร้าง คอลั่มชื่อ plate_no เก็บข้อมูลประเภท string ที่เป็น unicode ไม่เกิน 8 ตัวอักษร
+	สร้าง คอลั่มชื่อ time_in เก็บข้อมูลประเภทวันที่-เวลา
+	สร้าง คอลั่มชื่อ time_out เก็บข้อมูลประเภทวันที่-เวลา
+)
+เพิ่มแถวใน Table ชื่อ car_park โดยใส่ค่าดังนี้
+	แถวที่ 1 คอลั่ม plate_no รับข้อมูลประเภท unicode ภาษาไทย (N) 'กก 1234', คอลั่ม time_in รับข้อมูล '2023-01-01 11:00', คอลั่ม time_out รับข้อมูล '2023-01-01 13:00'
+	แถวที่ 2 คอลั่ม plate_no รับข้อมูลประเภท unicode ภาษาไทย (N) 'ขข 5678', คอลั่ม time_in รับข้อมูล '2023-01-01 11:00', คอลั่ม time_out รับข้อมูล '2023-01-01 11:10'
+	แถวที่ 3 คอลั่ม plate_no รับข้อมูลประเภท unicode ภาษาไทย (N) 'คค 0000', คอลั่ม time_in รับข้อมูล '2023-01-01 11:50', คอลั่ม time_out รับข้อมูล '2023-01-01 14:00'
+	แถวที่ 4 คอลั่ม plate_no รับข้อมูล 'AZ 2020' , คอลั่ม time_in รับข้อมูล '2023-01-01 11:50', คอลั่ม time_out รับข้อมูล '2023-01-01 15:10'
+***ให้ระวังการใช้ execute คำสั่ง insert เนื่องจากการ execute ทุกครั้งจะเป็นการเพิ่มข้อมูลใหม่ สมมุติหากกดซ้ำกันสองครั้งก็จะมีชุดข้อมูลเดียวกันเข้าไปใน Table ซ้ำกันสองครั้ง เป็นต้น ***
+
+-- คำนวณค่าจอดรถ 10 บาท ต่อ 1 ชม.
+declare @rate int = 10
+select *,
+datediff(minute,time_in,time_out) [Minute],
+datediff(minute,time_in,time_out) / 60 [Hour],
+datediff(minute,time_in,time_out) % 60 [Minute/Hr.],
+datediff(minute,time_in,time_out) / 60 * @rate + iif(datediff(minute,time_in,time_out) % 60 > 0, @rate, 0)  [Fee]
+from car_park
+ประกาศตัวแปร @rate เป็นตัวเลขจำนวนเต็ม เท่ากับ 10 (ตัวแปรใน SQL ต้องมี @นำหน้าเสมอ)
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ car_park
+แสดงนาทีที่แตกต่างกันของคอลั่ม time_in และ time_out แสดงผลคอลั่มชื่อ Minute
+แสดงนาทีที่แตกต่างกันของคอลั่ม time_in และ time_out และหารด้วย 60 เพื่อหาจำนวนชั่วโมง แสดงผลคอลั่มชื่อ Hour
+แสดงนาทีที่แตกต่างกันของคอลั่ม time_in และ time_out และหารเอาค่าเศษด้วย 60 เพื่อหานาทีใน 1 ชั่วโมง แสดงผลคอลั่มชื่อ Minute/Hr.
+แสดงนาทีที่แตกต่างกันของคอลั่ม time_in และ time_out และหารด้วย 60 บวกกับเงื่อนไขถ้า (iif) นาทีที่แตกต่างกันของคอลั่ม time_in และ time_out หารเอาค่าเศษด้วย 60 แล้วมากกว่า 0 ถ้าใช่ให้เป็นค่า @rate ถ้าไม่ใช่ให้เป็นค่า 0 แสดงผลคอลั่มชื่อ Fee (จุดประสงค์ของการใช้เงื่อนไข iif ในที่นี้คือการคำนวนเพื่อปัดค่าเศษนาทีให้เป็น 1 ชม. เพื่อคำนวนเป็นค่าจอดรถ)
+
+select top 10 *,
+format(inflation_adjusted_gross,'N'),
+format(inflation_adjusted_gross,'n0'),
+format(inflation_adjusted_gross,'#,##0'),
+format(inflation_adjusted_gross,'#,##0,,'),
+format(inflation_adjusted_gross,'#,##0,,.0 M')
+from movie_gross
+เลือกข้อมูล 10 อับดัยแรกจาก Table ชื่อ movie_gross
+แสดงค่าจากคอลั่ม inflation_adjusted_gross เป็นรูปแบบใส่เครื่องหมาย , ในทุกๆสามหลัก และใส่ทศนิยม 2 ตำแหน่ง
+แสดงค่าจากคอลั่ม inflation_adjusted_gross เป็นรูปแบบใส่เครื่องหมาย , ในทุกๆสามหลัก และไม่ใส่ทศนิยม
+แสดงค่าจากคอลั่ม inflation_adjusted_gross เป็นรูปแบบใส่เครื่องหมาย , ในทุกๆสามหลัก และตำแหน่งสุดท้ายเป็นหลักหน่วย
+แสดงค่าจากคอลั่ม inflation_adjusted_gross เป็นรูปแบบใส่เครื่องหมาย , ในทุกๆสามหลัก และข้ามเลขไป 6 หลัก (เครื่องหมาย ,, สองตัว หมายถึง หลักแสน) และตำแหน่งสุดท้ายเป็นหลักล้าน
+แสดงค่าจากคอลั่ม inflation_adjusted_gross เป็นรูปแบบใส่เครื่องหมาย , ในทุกๆสามหลัก และข้ามเลขไป 6 หลัก (เครื่องหมาย ,, สองตัว หมายถึง หลักแสน) และตำแหน่งสุดท้ายเป็นหลักล้านกับหลักแสนแสดงเป็นทศนิยม 1 ตำแหน่ง มีตัวอักษร M ต่อท้าย
+
+with whatever as (
+select genre, sum(inflation_adjusted_gross) sum_gross from movie_gross group by genre
+)
+select *,
+sum_gross *1.0 / (select sum(sum_gross) from whatever) sum_gross_of_total,
+format(sum_gross *1.0 / (select sum(sum_gross) from whatever), 'P') percent_of_total
+from whatever
+order by percent_of_total desc
+สร้าง Table ภายในชื่อ whatever ซึ่งมีข้อมูลดังนี้ (
+เลือกคอลั่ม genre จาก Table ชื่อ movie_gross, ผลรวมของคอลั่ม  inflation_adjusted_gross แสดงผลคอลั่มชื่อ sum_gross รวมกลุ่มค่าเดียวกันจากคอลั่ม genre
+)
+เลือกข้อมูลทั้งหมดจาก Table ภายในชื่อ whatever
+แสดงคอลั่ม sum_gross เป็นจำนวนจริง หารด้วย ผลรวมของ sum_gross แสดงคอลั่มชื่อ sum_gross_of_total
+แสดงผลลัพท์เหมือนบรรทัดบน แต่เปลี่ยนรูปแบบเป็น Percent แสดงคอลั่มชื่อ percent_of_total
+เรียงลำดับคอลั่ม percent_of_total จากมากไปน้อย
+
+select sum(inflation_adjusted_gross), count(*), avg(inflation_adjusted_gross) from movie_gross
+select genre, sum(inflation_adjusted_gross), count(*), avg(inflation_adjusted_gross) from movie_gross group by genre
+แสดงผลรวมของคอลั่ม inflation_adjusted_gross, นับจำนวนแถวทั้งหมด, แสดงค่าเฉลี่ยของคอลั่ม inflation_adjusted_gross จาก Table movie_gross
+ผลลัพท์ที่ได้จะแสดงบรรทัดเดียวคือผลรวมของทุกแถวในคอลั่ม inflation_adjusted_gross, นับจำนวนแถวทั้งหมด, นำผลรวมทุกแถวมาหารด้วยจำนวนแถวทุกแถวได้เป็นค่าเฉลี่ย
+เลือกคอลั่ม genre, แสดงผลรวมของคอลั่ม inflation_adjusted_gross, นับจำนวนแถวทั้งหมด, แสดงค่าเฉลี่ยของคอลั่ม inflation_adjusted_gross จาก Table movie_gross รวมกลุ่มค่าเดียวกันจากคอลั่ม genre
+ผลลัพท์ที่ได้จะแสดงแถวตามคอลั่ม genre, ผลรวมของ genre แต่ละประเภท, นับจำนวนแถวตาม genre แต่ละประเภท, ผลรวมของ genre แต่ละประเภทมาหารด้วยจำนวนแถวตาม genre แต่ละประเภทได้เป็นค่าเฉลี่ยของแต่ละ genre
+
+
+select genre, sum(inflation_adjusted_gross) summary, count(*) no_movies, avg(inflation_adjusted_gross) average
+from movie_gross 
+group by genre
+having count(*) > 100
+order by genre
+เลือกคอลั่ม genre, แสดงผลรวมของคอลั่ม inflation_adjusted_gross แสดงคอลั่มชื่อ summary, นับจำนวนแถวทั้งหมด แสดงคอลั่มชื่อ  no_movies, แสดงค่าเฉลี่ยของคอลั่ม inflation_adjusted_gross แสดงคอลั่มชื่อ average จาก Table movie_gross
+รวมกลุ่มค่าเดียวกันจากคอลั่ม genre
+having คือตัวกรองข้อมูลที่ได้ผลลัพท์มาแล้วจากการรวมกลุ่มของ group by ในตัวอย่างนี้คือ ให้หาค่าที่นับจำนวนรวมทั้งหมดของ genre แต่ละประเภท แล้วได้มากกว่า 100
+เรียงลำดับตามชื่อในคอลั่ม genre
+** การใช้ where กับ having ในการระบุเงื่อนไขอาจทำให้เกิดความสับสนได้ สำหรับ where จะเป็นการกรองข้อมูลแถวจากตาราง ส่วน having จะเป็นการกรองข้อมูลที่ได้ผลลัพท์แล้วซึ่งเกิดจากการดำเนินการบางอย่างมาก่อนเช่น การใช้ count() นับจำนวนทั้งหมด ซึ่งไม่มีข้อมูลอยู่ในตารางตั้งแต่แรก และมักใช้ group by ร่วมด้วยกับการดำเนินการเหล่านั้น
+
+
+select datepart(year, release_date) year, genre, sum(total_gross) gross
+from movie_gross
+where datepart(year, release_date) > 2013
+group by genre, datepart(year, release_date)
+เลือกข้อมูลคอลั่ม release_date แสดงเฉพาะปี, คอลั่ม genre, ผลรวมของคอลั่ม total_gross
+จาก Table ชื่อ movie_gross
+ระบุเงื่อนไข แสดงค่าจากคอลั่ม release_date ที่มีปีมากกว่า 2013
+รวมกลุ่ม  genre และปี เพื่อแสดงรายได้รวมตามประเภทหนังในแต่ละปี
+
+select datepart(year, release_date) year, genre, sum(total_gross) gross
+from movie_gross
+where datepart(year, release_date) > 2013
+group by grouping sets (
+			(datepart(year, release_date), genre),
+			(datepart(year, release_date)),
+			(genre),
+			()
+)
+having datepart(year, release_date) is not null
+order by year, genre
+เลือกข้อมูลคอลั่ม release_date แสดงเฉพาะปี, คอลั่ม genre, ผลรวมของคอลั่ม total_gross
+จาก Table ชื่อ movie_gross
+ระบุเงื่อนไข แสดงค่าจากคอลั่ม release_date ที่มีปีมากกว่า 2013
+รวมกลุ่มโดยการใช้ grouping sets คือต้องการให้ผลลัพท์ของการใช้ group by แต่ละกลุ่ม แสดงผลออกมาพร้อมกัน โดยมีค่าดังต่อไปนี้ (
+			รวมกลุ่ม  genre และปี เพื่อแสดงรายได้รวมตามประเภทหนังในแต่ละปี
+			รวมกลุ่มปี เพื่อแสดงรายได้รวมทุกประเภทของแต่ละปี
+			รวมกลุ่ม  genre เพื่อแสดงรายได้รวมทุกปีตามประเภทหนัง
+			รวมทั้งหมด หรือ Grand Total ใช้เป็น () เพื่อแสดงรายได้รวมทั้งหมดของทุกปีและทุกประเภทหนัง
+)
+ระบุเงื่อนไขใน group by ให้แสดงค่าปีที่ไม่ใช่ null 
+เรียงลำดับตามปีและ genre
+
+
+select datepart(month, dt) month, sum(revenue) revenue from daily_sales
+group by datepart(month, dt)
+union
+select null, sum(revenue) from daily_sales
+order by month
+เลือกข้อมูลเฉพาะเดือนจากคอลั่ม dt และผลรวมของคอลั่ม revenue จาก Table ชื่อ daily_sales
+รวมสองเงื่อนไขเข้าด้วยกัน และแสดงผลออกมาพร้อมกัน 
+เลือก แสดงค่า null และผลรวมของคอลั่ม revenue จาก Table ชื่อ daily_sales
+
+
+select datepart(year, dt) year, datepart(quarter, dt) quarter, datepart(month, dt) month, sum(revenue) total from daily_sales
+group by rollup(datepart(year, dt), datepart(quarter, dt), datepart(month, dt))
+order by year, quarter, month
+เลือกข้อมูลเฉพาะปีจากคอลั่ม dt, ข้อมูลเฉพาะไตรมาสจากคอลั่ม dt, ข้อมูลเฉพาะเดือนจากคอลั่ม dt, ผลรวมของคอลั่ม revenue จาก Table ชื่อ daily_sales
+รวมกลุ่มด้วยการใช้ rollup คือการรวมกลุ่มข้อมูลที่มีลักษณะเป็นขั้นบันไดเช่น (รายปี,รายไตรมาส,รายเดือน) หรือ (ระดับประเทศ,ระดับจังหวัด,ระดับอำเภอ,ระดับตำบล) เป็นต้น 
+ในตัวอย่างคือ รวมกลุ่ม (ข้อมูลเป็นรายปีจากคอลั่ม dt, ข้อมูลเป็นรายไตรมาสจากคอลั่ม dt, ข้อมูลเป็นรายเดือนจากคอลั่ม dt)
+เรียงลำดับจากปี ไตรมาส และเดือน
+
+
+select movie_title,mpaa_rating, 
+	case mpaa_rating
+	when 'G' then 'General Audiences'
+	when 'PG' then 'Parental Guidance'
+	when 'PG-13' then 'Parental Guidance-13'
+	when 'R' then 'Restricted'
+	else mpaa_rating
+	end as rating
+from movie_gross
+order by mpaa_rating
+เลือกข้อมูลคอลั่ม movie_title และ mpaa_rating จาก Table ชื่อ movie_gross
+	โดยมีเงื่อนไขของคอลั่ม mpaa_rating จากกรณีดังต่อไปนี้
+	เมื่อค่าเป็น 'G' ให้แสดงค่า 'General Audiences'
+	เมื่อค่าเป็น 'PG' ให้แสดงค่า 'Parental Guidance'
+	เมื่อค่าเป็น 'PG-13' ให้แสดงค่า 'Parental Guidance-13'
+	เมื่อค่าเป็น 'R' ให้แสดงค่า 'Restricted'
+	นอกเหนือจากนี้ ให้แสดงค่าเดิมตามคอลั่ม mpaa_rating
+	จบเงื่อนไข แสดงคอลั่มชื่อ rating
+เรียงลำดับข้อมูลตามคอลั่ม mpaa_rating
+
+with whatever as(
+select *, 
+	case
+	when inflation_adjusted_gross > 500000000 then '5 Stars Movies'
+	when inflation_adjusted_gross between 100000000 and 500000000 then 'Pop Corn Movies'
+	else 'Rotten Tomato Movies'
+	end as commentator
+from movie_gross
+order by inflation_adjusted_gross desc
+)
+select commentator, count(commentator) number from whatever group by commentator
+
+
+สร้าง Table ภายในชื่อ whatever ซึ่งมีข้อมูลดังนี้ (
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross
+	โดยมีเงื่อนไขจากกรณีดังต่อไปนี้
+	เมื่อข้อมูลคอลั่ม inflation_adjusted_gross มากกว่า 5 ร้อยล้าน ให้แสดงค่า '5 Stars Movies'
+	เมื่อข้อมูลคอลั่ม inflation_adjusted_gross อยู่ระหว่าง 1 ร้อยล้าน ถึง 5 ร้อยล้าน ให้แสดงค่า 'Pop Corn Movies'
+	นอกเหนือจากนี้ ให้แสดงค่า '5 Stars Movies'
+	จบเงื่อนไข แสดงคอลั่มชื่อ commentator
+เรียงลำดับข้อมูลตามคอลั่ม inflation_adjusted_gross จากมากไปน้อย
+)
+เลือกคอลั่ม commentator, นับจำนวนแถวของคอลั่ม commentator แสดงคอลั่มชื่อ number จากตารางภายใน whatever และรวมกลุ่มข้อมูลจากคอลั่ม commentator เพื่อแสดงจำนวนทั้งหมดตามประเภทของ commentator
+
+
+select * from movie_gross inner join director on movie_gross.movie_title = director.movie_title
+เลือกข้อมูลทั้งหมดจาก Table ชื่อ movie_gross รวมตาราง (inner join) กับ Table ชื่อ director ด้วยเงื่อนไขคอลั่มที่เชื่อมกันทั้งสองตารางเป็น primary key คือคอลั่ม movie_title
+
+select movie_gross.movie_title, movie_gross.release_date, director.director
+from movie_gross inner join director 
+on movie_gross.movie_title = director.movie_title
+เลือกข้อมูลคอลั่ม movie_title ของตาราง movie_gross, ข้อมูลคอลั่ม release_date ของตาราง movie_gross, ข้อมูลคอลั่ม director ของตาราง director
+จาก Table ชื่อ movie_gross รวมตารางกับ Table ชื่อ director
+ด้วยเงื่อนไขคอลั่มที่เชื่อมกันทั้งสองตารางเป็น primary key คือคอลั่ม movie_title
+
+select movie_gross.movie_title, release_date, director
+from movie_gross left join director 
+on movie_gross.movie_title = director.movie_title
+เลือกข้อมูลคอลั่ม movie_title ของตาราง movie_gross, ข้อมูลคอลั่ม release_date, ข้อมูลคอลั่ม director
+* ในการเลือกข้อมูล หากคอลั่มไม่ใช่ primary key หรือมีคอลั่มชื่อนี้เดี่ยวๆ สามารถพิมคำสั่งด้วยชื่อคอลั่มอย่างเดียวได้ แต่หากมีชื่อคอลั่มซ้ำกัน จะต้องพิมคำสั่งด้วย ชื่อตาราง.ชื่อคอลั่ม เท่านั้น
+จาก Table ชื่อ movie_gross รวมตารางกับ Table ชื่อ director โดยแสดงข้อมูลจากตารางฝั่งซ้ายทั้งหมด
+ด้วยเงื่อนไขคอลั่มที่เชื่อมกันทั้งสองตารางเป็น primary key คือคอลั่ม movie_title
+
+with whatever as(
+select m.movie_title, m.release_date, d.director, c.song
+from movie_gross as m right join director as d
+on m.movie_title = d.movie_title right join disney_char as c
+on m.movie_title = c.movie_title
+)
+select year(release_date) year, director, song from whatever 
+where release_date is not null
+order by release_date
+สร้างตารางภายในชื่อ whatever(
+เลือกข้อมูลคอลั่ม movie_title ของตาราง m, ข้อมูลคอลั่ม release_date ของตาราง m, ข้อมูลคอลั่ม director ของตาราง d,ข้อมูลคอลั่ม song ของตาราง c
+จาก Table ชื่อ movie_gross ตั้งชื่อตาราง m รวมตารางกับ Table ชื่อ director ตั้งชื่อตาราง d โดยแสดงข้อมูลจากตารางฝั่งขวาทั้งหมด
+ด้วยเงื่อนไขคอลั่มที่เชื่อมกันทั้งสองตารางเป็น primary key คือคอลั่ม movie_title และรวมตารางกับ Table ชื่อ disney_char ตั้งชื่อตาราง c โดยแสดงข้อมูลจากตารางฝั่งขวาทั้งหมด
+ด้วยเงื่อนไขคอลั่มที่เชื่อมกันทั้งสองตารางเป็น primary key คือคอลั่ม movie_title
+)
+เลือกข้อมูลเฉพาะปีจากคอลั่ม release_date ตั้งชื่อคอลั่ม year, เลือกข้อมูลคอลั่ม director, เลือกข้อมูลคอลั่ม song จากตารางภายในชื่อ whatever
+ระบุเงื่อนไข ข้อมูลจากคอลั่ม release_date ไม่ใช่ค่า null
+เรียงข้อมูลตามวันที่จากคอลั่ม release_date
+
+
+with tb as(
+select genre, datepart(year,release_date) year, sum(inflation_adjusted_gross) summary from movie_gross
+where genre in('action','adventure') and datepart(year,release_date) > 2010
+group by datepart(year,release_date), genre
+)
+select ac.year, ac.summary [action], ad.summary [adventure]
+from tb ac inner join tb ad on ac.year = ad.year and ac.genre = 'action' and ad.genre = 'adventure'
+สร้างตารางภายในชื่อ tb(
+เลือกข้อมูลคอลั่ม genre, เลือกข้อมูลเฉพาะปีในคอลั่ม release_date ตั้งชื่อคอลั่ม year, แสดงผลรวมของคอลั่ม inflation_adjusted_gross ตั้งชื่อ summary จาก Table ชื่อ movie_gross
+ระบุเงื่อนไขแสดงข้อมูล genre เท่ากับ action หรือ adventure และแสดงข้อมูลเฉพาะปีในคอลั่ม release_date มากกว่า 2010
+รวมกลุ่มด้วย ข้อมูลเฉพาะปีในคอลั่ม release_date และ genre
+)
+เลือกข้อมูลคอลั่ม year ของตาราง ac, เลือกข้อมูลคอลั่ม summary ของตาราง ac ตั้งชื่อคอลั่มใหม่ action, เลือกข้อมูลคอลั่ม summary ของตาราง ad ตั้งชื่อคอลั่มใหม่ adventure
+จากตารางภายใน tb สร้างเป็นสองตารางและตั้งชื่อใหม่เป็น ac และ ad รวมตารางกัน (การทำ self join) ด้วยเงื่อนไขคอลั่มที่เชื่อมกันทั้งสองตารางเป็น primary key คือคอลั่ม year 
+และคอลั่ม genre ของตาราง ac เท่ากับ action และคอลั่ม genre ของตาราง ad เท่ากับ adventure
+
+
+drop table if exists soccer
+create table soccer (
+	rank int,
+	team nvarchar(50)
+);
+insert into soccer values
+	(1,'FC Bayern Munich'),
+	(2,'LB Leipzig'),
+	(3,'Borussia Dortmund'),
+	(4,'FC Union Berlin')
+
+--select * from soccer home cross join soccer away
+select home.team, away.team from soccer home cross join soccer away
+--select concat(home.team, ' (',home.rank, ')') [home team], concat(away.team, ' (',away.rank, ')') [away team] from soccer home cross join soccer away
+where home.team != away.team		-- กรณีแข่งแบบทีมเหย้า-ทีมเยือน
+--where home.team > away.team		-- กรณีแข่งแบบเจอกันครั้งเดียว
+ลบ Table ชื่อ soccer ถ้ามี Table ชื่อนี้อยู่แล้ว
+สร้าง table ชื่อ soccer โดยระบุโครงสร้างดังนี้ (
+	สร้างคอลั่มชื่อ rank เก็บข้อมูลประเภทเลขจำนวนเต็ม
+	สร้างคอลั่มชื่อ team เก็บข้อมูลประเภทตัวอักษรไม่เกิน 50 ตัว
+)
+ใส่ข้อมูลใน table ชื่อ soccer โดยใส่ค่าดังนี้
+	แถวที่ 1 คอลั่ม rank รับข้อมูลตัวเลข 1, คอลั่ม team ข้อมูลประเภทอักษร FC Bayern Munich
+	แถวที่ 2 คอลั่ม rank รับข้อมูลตัวเลข 2, คอลั่ม team ข้อมูลประเภทอักษร LB Leipzig
+	แถวที่ 2 คอลั่ม rank รับข้อมูลตัวเลข 3, คอลั่ม team ข้อมูลประเภทอักษร Borussia Dortmund
+	แถวที่ 2 คอลั่ม rank รับข้อมูลตัวเลข 4, คอลั่ม team ข้อมูลประเภทอักษร FC Union Berlin
+--เลือกข้อมูลทั้งหมดจากตาราง soccer ตั้งชื่อใหม่เป็น home และ away และนำสองตารางมารวมกันแบบผลคูณคาทีเชี่ยน (cross join) * เพิ่มเติม https://en.wikipedia.org/wiki/Cartesian_product *
+เลือกข้อมูลจากคอลั่ม team ของตาราง home, ข้อมูลจากคอลั่ม team ของตาราง away จากตาราง soccer ที่ cross join กัน ด้วยตารางชื่อใหม่ home และ away
+-- เลือกข้อมูลจากคอลั่ม team ของตาราง home และข้อมูลจากคอลั่ม rank ของตาราง home เชื่อมต่อข้อความเข้าด้วยกัน ด้วยฟังก์ชั่น concat() ตั้งชื่อคอลั่มใหม่ home team, เลือกข้อมูลจากคอลั่ม team ของตาราง away และข้อมูลจากคอลั่ม rank ของตาราง awayเชื่อมต่อข้อความเข้าด้วยกัน ด้วยฟังก์ชั่น concat() ตั้งชื่อคอลั่มใหม่ away team จากตาราง soccer ที่ cross join กัน ด้วยตารางชื่อใหม่ home และ away
+ระบุเงื่อนไข ข้อมูลคอลั่ม team ของตาราง home ไม่เท่ากับ ข้อมูลคอลั่ม team ของตาราง away  * กรณีแข่งแบบทีมเหย้า-ทีมเยือน 4 ทีม ได้ผลลัพท์ 12 แถว
+-- ระบุเงื่อนไข ข้อมูลคอลั่ม team ของตาราง home มากกว่า ข้อมูลคอลั่ม team ของตาราง away  * กรณีแข่งแบบเจอกันครั้งเดียว 4 ทีม ได้ผลลัพท์ 6 แถว
+
+
+with casino1 as(
+select value as card from string_split('A,2,3,4,5,6,7,8,9,10,J,Q,K',',')
+),
+	casino2 as(
+select value as symbol from string_split(N'♠,♥,♦,♣',',')
+--https://en.wikipedia.org/wiki/Playing_card_suit
+)
+select concat(card,symbol) dealer from casino1 cross join casino2
+--select top 2 concat(card,symbol) dealer from casino1 cross join casino2
+--order by newid()
+สร้างตารางภายในชื่อ casino1 ระบุเงื่อนไขดังนี้ (
+ส่งค่าจากฟังก์ชั่น string_split() เพื่อแสดงข้อมูลแบ่งเป็นแต่ละแถว ในตัวอย่างนี้ให้แบ่งข้อมูล string ด้วยตัว comma(,) ตั้งชื่อคอลั่ม card
+),
+สร้างตารางภายในชื่อ casino2 ระบุเงื่อนไขดังนี้ (
+ส่งค่าจากฟังก์ชั่น string_split() เพื่อแสดงข้อมูลแบ่งเป็นแต่ละแถว ในตัวอย่างนี้ให้แบ่งข้อมูล string ด้วยตัว comma(,) และใส่ format อักษร N สำหรับแสดงผลข้อความ unicode ตั้งชื่อคอลั่ม symbol
+-- ข้อมูลรูปสัญลักษณ์หน้าไพ่จาก https://en.wikipedia.org/wiki/Playing_card_suit
+)
+เลือกข้อมูลจากคอลั่ม card ของตาราง casino1 และข้อมูลจากคอลั่ม symbol ของตาราง casino2 เชื่อมต่อข้อความเข้าด้วยกัน ด้วยฟังก์ชั่น concat() ตั้งชื่อคอลั่มใหม่ dealer จากตาราง casino1 และ casino2 ที่ cross join กัน
+-- เลือกข้อมูล 2 อันดับแบบสุ่ม (มีผลมาจาก ฟังก์ชั่น newid) จากคอลั่ม card ของตาราง casino1 และข้อมูลจากคอลั่ม symbol ของตาราง casino2 เชื่อมต่อข้อความเข้าด้วยกัน ด้วยฟังก์ชั่น concat() ตั้งชื่อคอลั่มใหม่ dealer จากตาราง casino1 และ casino2 ที่ cross join กัน
+-- เรียงลำดับข้อมูลจากฟังก์ชั่น newid() ที่สร้าง unique id ขึ้นมาใหม่ให้แต่ละแถวแบบสุ่ม
+
+
+
+
+
+
+
+
